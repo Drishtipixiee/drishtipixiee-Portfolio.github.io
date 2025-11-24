@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Drishti Mishra — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent1:#7c3aed;
+  --accent2:#06b6d4;
+  --muted: #98a8b9;
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent 8%),
+              radial-gradient(900px 500px at 90% 90%, rgba(6,182,212,0.06), transparent 8%),
+              var(--bg);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:36px;
+}
+
+/* container */
+.container{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+/* header */
+.header{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  margin-bottom:28px;
+}
+.avatar{
+  width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:white;box-shadow:0 6px 30px rgba(2,6,23,0.6);
+}
+.header-info h1{margin:0;font-size:22px}
+.header-info p{margin:4px 0 0;color:var(--muted);font-size:14px}
+
+/* summary card */
+.summary{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding:18px;border-radius:12px;margin-bottom:22px;display:flex;gap:16px;align-items:center;backdrop-filter: blur(6px);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.badge{
+  font-size:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:600;
+}
+
+/* grid */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:20px;
+}
+
+/* main column */
+.main{
+  display:flex;flex-direction:column;gap:18px;
+}
+
+/* projects */
+.projects{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;
+}
+.card{
+  background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
+  position:relative;overflow:hidden;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+.card .title{font-weight:600;margin:0 0 6px}
+.card .desc{font-size:13px;color:var(--muted);margin:0 0 10px}
+.card .tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;padding:6px 8px;background:var(--glass);border-radius:8px;color:var(--muted);}
+
+/* project ribbon animation */
+.ribbon{
+  position:absolute;right:-60px;top:-60px;width:180px;height:180px;background:linear-gradient(45deg,var(--accent1),var(--accent2));transform:rotate(45deg);opacity:0.07;
+}
+
+/* sidebar */
+.sidebar{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+}
+.side-section{margin-bottom:14px}
+.side-section h3{margin:0 0 8px;font-size:15px}
+.side-section p{margin:0;color:var(--muted);font-size:13px}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;text-decoration:none;font-weight:600;
+  box-shadow:0 8px 30px rgba(12,12,20,0.4);
+}
+
+/* footer */
+.footer{margin-top:24px;color:var(--muted);font-size:13px;text-align:center}
+
+/* animations */
+@keyframes floaty {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-6px) }
+  100% { transform: translateY(0px) }
+}
+.avatar{animation:floaty 6s ease-in-out infinite}
+
+/* responsive */
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .sidebar{order:2}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <div class="avatar">DM</div>
+    <div class="header-info">
+      <h1>Drishti Mishra</h1>
+      <p>Software | Cloud | Cybersecurity | Open-source</p>
+      <p style="margin-top:6px;color:var(--muted)">📍 Mumbai • 📧 drishtimishra168@gmail.com • 📞 +91 9156610416</p>
+    </div>
+  </header>
+
+  <div class="summary">
+    <div style="flex:1">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="badge">B.Tech IT • GPA: 8.00</div>
+        <div style="color:var(--muted);font-size:13px">Usha Mittal Institute of Technology</div>
+      </div>
+      <p style="margin-top:8px;color:#dfeffc;font-size:14px">I build full-stack projects, data visualizations, and AI-powered tools, and I contribute to open-source. I'm looking for roles in Software Engineering, Cloud/DevOps, and Security.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+      <a class="btn" href="/mnt/data/Drishti_Mishra_Resume.docx" download>Download Resume</a>
+      <a class="btn" href="https://github.com/Drishtipixiee" target="_blank" style="background:transparent;border:1px solid rgba(255,255,255,0.06);">View GitHub</a>
+    </div>
+  </div>
+
+  <div class="grid">
+    <main class="main">
+      <section>
+        <h2 style="margin:0 0 10px">Highlighted Projects</h2>
+        <div class="projects">
+          <article class="card">
+            <div class="ribbon"></div>
+            <h3 class="title">Smart-Pantry-AI-Chef-By-Drishti</h3>
+            <p class="desc">SIH 2025 project: Real-time pantry tracking + AI recipe suggestions to reduce food waste. Built inventory logic and recommendation engine.</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">AI</span><span class="tag">IoT</span>
+            </div>
+            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/Smart-Pantry-AI-Chef-By-Drishti" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+          </article>
+
+          <article class="card">
+            <div class="ribbon"></div>
+            <h3 class="title">Chatbot-by-Drishtipixie</h3>
+            <p class="desc">Rule-based chatbot with basic NLP logic for Q&A interactions and intent matching.</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">NLP</span>
+            </div>
+            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/Chatbot-by-Drishtipixie" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+          </article>
+
+          <article class="card">
+            <div class="ribbon"></div>
+            <h3 class="title">forage-midas (JPMC)</h3>
+            <p class="desc">Forked repo used during JPMC software engineering simulation—contains exercises and config for the program.</p>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">Forage</span>
+            </div>
+            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/forage-midas" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+          </article>
+
+          <article class="card">
+            <div class="ribbon"></div>
+            <h3 class="title">Ipo-Tracker-by-Drishti</h3>
+            <p class="desc">Real-time IPO tracker leveraging public APIs to fetch and display IPO listings and basic analytics.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">APIs</span></div>
+            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/Ipo-Tracker-by-Drishti" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+          </article>
+
+          <article class="card">
+            <h3 class="title">University-Website</h3>
+            <p class="desc">Responsive multi-page site built with HTML, CSS, JavaScript — demonstrates web fundamentals and responsive layout.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/University-Website-using-Html-css-javascript-" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+          </article>
+
+          <article class="card">
+            <h3 class="title">my-fact-generator-project</h3>
+            <p class="desc">Fun Fact Generator project using Pieces toolkit for dynamic content generation.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Toolkit</span></div>
+            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/my-fact-generator-project" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
+          </article>
+
+        </div>
+      </section>
+
+      <section style="margin-top:8px">
+        <h2 style="margin:0 0 10px">Open-Source & Community</h2>
+        <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)">
+          <p style="margin:0 0 8px;color:#dfeffc">I contribute to Zulip and other open-source projects — focusing on backend bug fixes, webhook rendering behavior, documentation, and CI troubleshooting. I work through PR reviews, reproduce issues locally, and collaborate with maintainers to improve code quality.</p>
+          <p style="margin:6px 0 0;color:var(--muted)"><a href="https://github.com/Drishtipixiee" target="_blank" style="color:var(--accent2)">See my GitHub profile →</a></p>
+        </div>
+      </section>
+    </main>
+
+    <aside class="sidebar">
+      <div class="side-section">
+        <h3>Skills</h3>
+        <p>Python • Java • SQL • HTML/CSS/JS • Git • Google Cloud • Data Viz • CI/CD basics • Cybersecurity fundamentals</p>
+      </div>
+
+      <div class="side-section">
+        <h3>Education</h3>
+        <p>Usha Mittal Institute of Technology — B.Tech IT (GPA: 8.00)</p>
+      </div>
+
+      <div class="side-section">
+        <h3>Simulations & Trainings</h3>
+        <p>Tata Forage (Data Viz) • JPMC (Software Eng) • Deloitte (Cyber)</p>
+      </div>
+
+      <div class="side-section">
+        <h3>Contact</h3>
+        <p style="color:var(--muted)">drishtimishra168@gmail.com<br>+91 9156610416</p>
+        <p style="margin-top:6px"><a class="btn" href="https://github.com/Drishtipixiee" target="_blank">GitHub</a></p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="footer">
+    Built with ❤️ — Projects & links pulled from my GitHub.<br>
+    Profile source: https://github.com/Drishtipixiee
+  </div>
+</div>
+</body>
+</html>
