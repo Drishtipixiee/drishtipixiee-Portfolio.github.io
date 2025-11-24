@@ -1,250 +1,216 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Drishti Mishra — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0f1724;
-  --card:#0b1220;
-  --accent1:#7c3aed;
-  --accent2:#06b6d4;
-  --muted: #98a8b9;
-  --glass: rgba(255,255,255,0.03);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent 8%),
-              radial-gradient(900px 500px at 90% 90%, rgba(6,182,212,0.06), transparent 8%),
-              var(--bg);
-  color:#e6eef8;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  padding:36px;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Drishti Mishra — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1724;
+      --soft:#0b2233;
+      --muted:#9fb4c9;
+      --glass: rgba(255,255,255,0.03);
+      --accent1:#7c3aed;
+      --accent2:#06b6d4;
+      --accent3:#f59e0b;
+      --white: #e6eef8;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#041028 0%,var(--bg) 60%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--white);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1000px;margin:18px auto;padding:18px}
+    /* Hero */
+    .hero{
+      background:linear-gradient(180deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03));
+      border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center;border:1px solid rgba(255,255,255,0.04);
+    }
+    .avatar{width:86px;height:86px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:32px;color:white;flex-shrink:0;box-shadow:0 18px 60px rgba(2,6,23,0.6)}
+    .hero-body{flex:1;min-width:0}
+    .name{font-size:20px;font-weight:800;margin:0 0 6px}
+    .sub{color:var(--muted);margin:0;font-size:13px}
+    .hero-tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700;font-size:12px}
 
-/* container */
-.container{
-  max-width:1100px;
-  margin:0 auto;
-}
+    /* Buttons row */
+    .actions{display:flex;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;font-weight:700;border:0;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;box-shadow:0 14px 40px rgba(124,58,237,0.12)}
 
-/* header */
-.header{
-  display:flex;
-  gap:20px;
-  align-items:center;
-  margin-bottom:28px;
-}
-.avatar{
-  width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:white;box-shadow:0 6px 30px rgba(2,6,23,0.6);
-}
-.header-info h1{margin:0;font-size:22px}
-.header-info p{margin:4px 0 0;color:var(--muted);font-size:14px}
+    /* Layout */
+    .content{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:18px}
+    main{display:flex;flex-direction:column;gap:18px}
+    aside{position:sticky;top:18px;height:max-content;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
 
-/* summary card */
-.summary{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  padding:18px;border-radius:12px;margin-bottom:22px;display:flex;gap:16px;align-items:center;backdrop-filter: blur(6px);
-  border:1px solid rgba(255,255,255,0.03);
-}
-.badge{
-  font-size:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:600;
-}
+    /* Sections */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .card h3{margin:0 0 8px;font-size:15px}
+    .muted{color:var(--muted);font-size:13px;margin:0}
 
-/* grid */
-.grid{
-  display:grid;
-  grid-template-columns: 1fr 360px;
-  gap:20px;
-}
+    /* Projects grid - airy and spacious on mobile */
+    .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+    .project{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.006), transparent);padding:12px;transition:transform .22s,box-shadow .22s}
+    .project:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(2,6,23,0.5)}
+    .proj-thumb{height:140px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white;margin-bottom:12px;font-size:14px}
+    .proj-title{font-weight:800;margin:0 0 6px}
+    .proj-desc{margin:0;color:var(--muted);font-size:13px}
 
-/* main column */
-.main{
-  display:flex;flex-direction:column;gap:18px;
-}
+    /* Skills list */
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .skill{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:10px;color:var(--muted);font-weight:700;font-size:13px}
 
-/* projects */
-.projects{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;
-}
-.card{
-  background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
-  transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
-  position:relative;overflow:hidden;
-}
-.card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
-.card .title{font-weight:600;margin:0 0 6px}
-.card .desc{font-size:13px;color:var(--muted);margin:0 0 10px}
-.card .tags{display:flex;gap:8px;flex-wrap:wrap}
-.tag{font-size:12px;padding:6px 8px;background:var(--glass);border-radius:8px;color:var(--muted);}
+    /* Mobile bottom sticky contact bar */
+    .mobile-bar{display:none;position:fixed;left:12px;right:12px;bottom:18px;background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:12px;border-radius:14px;box-shadow:0 18px 60px rgba(2,6,23,0.5);justify-content:space-between;align-items:center;z-index:99}
+    .mobile-bar a{color:white;font-weight:800;text-decoration:none}
 
-/* project ribbon animation */
-.ribbon{
-  position:absolute;right:-60px;top:-60px;width:180px;height:180px;background:linear-gradient(45deg,var(--accent1),var(--accent2));transform:rotate(45deg);opacity:0.07;
-}
+    /* Footer */
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
 
-/* sidebar */
-.sidebar{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
-}
-.side-section{margin-bottom:14px}
-.side-section h3{margin:0 0 8px;font-size:15px}
-.side-section p{margin:0;color:var(--muted);font-size:13px}
+    /* Responsive adjustments - make spacious on mobile */
+    @media (max-width:900px){
+      .wrap{padding:12px}
+      .content{grid-template-columns:1fr;gap:14px}
+      .hero{flex-direction:row;gap:12px;padding:14px}
+      .avatar{width:72px;height:72px;font-size:26px}
+      .actions{flex-wrap:wrap}
+      .proj-thumb{height:160px}
+      main{gap:12px}
+      .project{padding:14px}
+      .mobile-bar{display:flex}
+      aside{order:2}
+      .card{padding:12px}
+    }
 
-/* buttons */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;text-decoration:none;font-weight:600;
-  box-shadow:0 8px 30px rgba(12,12,20,0.4);
-}
-
-/* footer */
-.footer{margin-top:24px;color:var(--muted);font-size:13px;text-align:center}
-
-/* animations */
-@keyframes floaty {
-  0% { transform: translateY(0px) }
-  50% { transform: translateY(-6px) }
-  100% { transform: translateY(0px) }
-}
-.avatar{animation:floaty 6s ease-in-out infinite}
-
-/* responsive */
-@media (max-width:900px){
-  .grid{grid-template-columns:1fr}
-  .sidebar{order:2}
-}
-</style>
+    /* Large screens spacing */
+    @media (min-width:1200px){
+      .wrap{padding:28px}
+      .proj-thumb{height:150px}
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <header class="header">
-    <div class="avatar">DM</div>
-    <div class="header-info">
-      <h1>Drishti Mishra</h1>
-      <p>Software | Cloud | Cybersecurity | Open-source</p>
-      <p style="margin-top:6px;color:var(--muted)">📍 Mumbai • 📧 drishtimishra168@gmail.com • 📞 +91 9156610416</p>
-    </div>
-  </header>
-
-  <div class="summary">
-    <div style="flex:1">
-      <div style="display:flex;gap:10px;align-items:center">
-        <div class="badge">B.Tech IT • CGPA: 7.81 (Second Year: 8.00)</div>
-        <div style="color:var(--muted);font-size:13px">Usha Mittal Institute of Technology</div>
-      </div>
-      <p style="margin-top:8px;color:#dfeffc;font-size:14px">I build full-stack projects, data visualizations, and AI-powered tools, and I contribute to open-source. I'm looking for roles in Software Engineering, Cloud/DevOps, and Security.</p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-      <a class="btn" href="/mnt/data/Drishti_Mishra_Resume.docx" download>Download Resume</a>
-      <a class="btn" href="https://github.com/Drishtipixiee" target="_blank" style="background:transparent;border:1px solid rgba(255,255,255,0.06);">View GitHub</a>
-    </div>
-  </div>
-
-  <div class="grid">
-    <main class="main">
-      <section>
-        <h2 style="margin:0 0 10px">Highlighted Projects</h2>
-        <div class="projects">
-          <article class="card">
-            <div class="ribbon"></div>
-            <h3 class="title">Smart-Pantry-AI-Chef-By-Drishti</h3>
-            <p class="desc">SIH 2025 project: Real-time pantry tracking + AI recipe suggestions to reduce food waste. Built inventory logic and recommendation engine.</p>
-            <div class="tags">
-              <span class="tag">Python</span><span class="tag">AI</span><span class="tag">IoT</span>
-            </div>
-            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/Smart-Pantry-AI-Chef-By-Drishti" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
-          </article>
-
-          <article class="card">
-            <div class="ribbon"></div>
-            <h3 class="title">Chatbot-by-Drishtipixie</h3>
-            <p class="desc">Rule-based chatbot with basic NLP logic for Q&A interactions and intent matching.</p>
-            <div class="tags">
-              <span class="tag">Python</span><span class="tag">NLP</span>
-            </div>
-            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/Chatbot-by-Drishtipixie" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
-          </article>
-
-          <article class="card">
-            <div class="ribbon"></div>
-            <h3 class="title">forage-midas (JPMC)</h3>
-            <p class="desc">Forked repo used during JPMC software engineering simulation—contains exercises and config for the program.</p>
-            <div class="tags">
-              <span class="tag">Java</span><span class="tag">Forage</span>
-            </div>
-            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/forage-midas" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
-          </article>
-
-          <article class="card">
-            <div class="ribbon"></div>
-            <h3 class="title">Ipo-Tracker-by-Drishti</h3>
-            <p class="desc">Real-time IPO tracker leveraging public APIs to fetch and display IPO listings and basic analytics.</p>
-            <div class="tags"><span class="tag">Python</span><span class="tag">APIs</span></div>
-            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/Ipo-Tracker-by-Drishti" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
-          </article>
-
-          <article class="card">
-            <h3 class="title">University-Website</h3>
-            <p class="desc">Responsive multi-page site built with HTML, CSS, JavaScript — demonstrates web fundamentals and responsive layout.</p>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
-            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/University-Website-using-Html-css-javascript-" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
-          </article>
-
-          <article class="card">
-            <h3 class="title">my-fact-generator-project</h3>
-            <p class="desc">Fun Fact Generator project using Pieces toolkit for dynamic content generation.</p>
-            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Toolkit</span></div>
-            <p style="margin-top:10px"><a href="https://github.com/Drishtipixiee/my-fact-generator-project" target="_blank" style="color:var(--accent2)">View on GitHub →</a></p>
-          </article>
-
+  <div class="wrap" role="main" aria-label="Drishti portfolio">
+    <section class="hero" aria-label="Introduction">
+      <div class="avatar" aria-hidden="true">DM</div>
+      <div class="hero-body">
+        <div class="name">Hi — I'm Drishti Mishra</div>
+        <div class="sub">Software Engineer in training • Cloud & DevOps • Cybersecurity • Open-source contributor</div>
+        <div class="hero-tags" aria-hidden="true">
+          <div class="pill">Python</div>
+          <div class="pill">Java</div>
+          <div class="pill">Spring Boot</div>
+          <div class="pill">Data Viz</div>
         </div>
-      </section>
 
-      <section style="margin-top:8px">
-        <h2 style="margin:0 0 10px">Open-Source & Community</h2>
-        <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)">
-          <p style="margin:0 0 8px;color:#dfeffc">I contribute to Zulip and other open-source projects — focusing on backend bug fixes, webhook rendering behavior, documentation, and CI troubleshooting. I work through PR reviews, reproduce issues locally, and collaborate with maintainers to improve code quality.</p>
-          <p style="margin:6px 0 0;color:var(--muted)"><a href="https://github.com/Drishtipixiee" target="_blank" style="color:var(--accent2)">See my GitHub profile →</a></p>
+        <div class="actions" role="group" aria-label="Quick actions">
+          <a class="btn btn-ghost" href="https://github.com/Drishtipixiee" target="_blank" title="My GitHub">GitHub</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/drishti-mishra-665827382" target="_blank" title="LinkedIn">LinkedIn</a>
+          <a class="btn btn-primary" href="file:///mnt/data/Drishti_Mishra_Resume_Updated.docx" download title="Download resume">Download Resume</a>
         </div>
-      </section>
-    </main>
-
-    <aside class="sidebar">
-      <div class="side-section">
-        <h3>Skills</h3>
-        <p>Python • Java • SQL • HTML/CSS/JS • Git • Google Cloud • Data Viz • CI/CD basics • Cybersecurity fundamentals</p>
       </div>
+    </section>
 
-      <div class="side-section">
-        <h3>Education</h3>
-        <p>Usha Mittal Institute of Technology — B.Tech IT (GPA: 8.00)</p>
-      </div>
+    <div class="content">
+      <main>
+        <div class="card">
+          <h3>Spotlight — Smart Pantry & AI Chef</h3>
+          <p class="muted">Real-time pantry tracking + AI recipe engine to minimize food waste. I worked on inventory logic, API integrations, and the recommendation engine.</p>
+        </div>
 
-      <div class="side-section">
-        <h3>Simulations & Trainings</h3>
-        <p>Tata Forage (Data Viz) • JPMC (Software Eng) • Deloitte (Cyber)</p>
-      </div>
+        <div class="card">
+          <h3>Selected Projects</h3>
+          <div class="projects" role="list">
+            <article class="project" role="listitem">
+              <div class="proj-thumb">Smart Pantry — SIH 2025</div>
+              <div class="proj-title">Smart-Pantry-AI-Chef-By-Drishti</div>
+              <div class="proj-desc">Inventory tracking + AI recipe suggestions. <a href="https://github.com/Drishtipixiee/Smart-Pantry-AI-Chef-By-Drishti" target="_blank">View on GitHub →</a></div>
+            </article>
 
-      <div class="side-section">
-        <h3>Contact</h3>
-        <p style="color:var(--muted)">drishtimishra168@gmail.com<br>+91 9156610416</p>
-        <p style="margin-top:6px"><a class="btn" href="https://github.com/Drishtipixiee" target="_blank">GitHub</a></p>
-      </div>
-    </aside>
+            <article class="project" role="listitem">
+              <div class="proj-thumb">Chatbot</div>
+              <div class="proj-title">Chatbot-by-Drishtipixie</div>
+              <div class="proj-desc">Rule-based chatbot with intent matching. <a href="https://github.com/Drishtipixiee/Chatbot-by-Drishtipixie" target="_blank">View →</a></div>
+            </article>
+
+            <article class="project" role="listitem">
+              <div class="proj-thumb">IPO Tracker</div>
+              <div class="proj-title">Ipo-Tracker-by-Drishti</div>
+              <div class="proj-desc">Live IPO scraper + analytics. <a href="https://github.com/Drishtipixiee/Ipo-Tracker-by-Drishti" target="_blank">View →</a></div>
+            </article>
+
+            <article class="project" role="listitem">
+              <div class="proj-thumb">Fun Fact</div>
+              <div class="proj-title">my-fact-generator-project</div>
+              <div class="proj-desc">Dynamic fact generator using Pieces toolkit. <a href="https://github.com/Drishtipixiee/my-fact-generator-project" target="_blank">View →</a></div>
+            </article>
+
+            <article class="project" role="listitem">
+              <div class="proj-thumb">Uni Site</div>
+              <div class="proj-title">University-Website</div>
+              <div class="proj-desc">Responsive multi-page site. <a href="https://github.com/Drishtipixiee/University-Website-using-Html-css-javascript-" target="_blank">View →</a></div>
+            </article>
+
+            <article class="project" role="listitem">
+              <div class="proj-thumb">Viz App</div>
+              <div class="proj-title">Data-Visualization-Tool-by-Drishti</div>
+              <div class="proj-desc">JavaFX CSV analysis & charts. <a href="https://github.com/Drishtipixiee/Data-Visualization-Tool-by-Drishti" target="_blank">View →</a></div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Open-Source & Contributions</h3>
+          <p class="muted">I contribute to open-source projects including backend bug fixes, markdown/webhook issues, documentation, and CI troubleshooting. I work through PR reviews and collaborate with maintainers to improve code quality.</p>
+        </div>
+
+      </main>
+
+      <aside aria-label="Sidebar">
+        <div class="card">
+          <h3>Skills</h3>
+          <div class="skills">
+            <div class="skill">Python</div>
+            <div class="skill">Java</div>
+            <div class="skill">Spring Boot</div>
+            <div class="skill">SQL</div>
+            <div class="skill">HTML/CSS/JS</div>
+            <div class="skill">React (basic)</div>
+            <div class="skill">Google Analytics</div>
+            <div class="skill">Google Cloud</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Simulations</h3>
+          <p class="muted">Tata Forage (Data Viz) • JPMC (Software Eng) • Deloitte (Cyber)</p>
+        </div>
+
+        <div class="card">
+          <h3>Contact</h3>
+          <p class="muted">Email: drishtimishrahere@gmail.com</p>
+          <p style="margin-top:10px"><a class="btn btn-ghost" href="https://github.com/Drishtipixiee" target="_blank">GitHub</a> <a class="btn btn-ghost" href="https://www.linkedin.com/in/drishti-mishra-665827382" target="_blank">LinkedIn</a></p>
+        </div>
+      </aside>
+    </div>
+
+    <footer><small>Built by Drishti • View resume & projects above</small></footer>
+
+    <div class="mobile-bar" role="dialog" aria-hidden="false" style="display:none">
+      <a href="mailto:drishtimishrahere@gmail.com">Email</a>
+      <a href="file:///mnt/data/Drishti_Mishra_Resume_Updated.docx" download style="margin-left:12px">Resume</a>
+    </div>
   </div>
 
-  <div class="footer">
-    Built with ❤️ — Projects & links pulled from my GitHub.<br>
-    Profile source: https://github.com/Drishtipixiee
-  </div>
-</div>
+  <script>
+    // show mobile bar on small screens
+    function updateMobileBar(){ const bar = document.querySelector('.mobile-bar'); if(window.innerWidth<=720) bar.style.display='flex'; else bar.style.display='none'; }
+    window.addEventListener('resize', updateMobileBar);
+    updateMobileBar();
+  </script>
 </body>
 </html>
