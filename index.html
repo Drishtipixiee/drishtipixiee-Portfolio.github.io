@@ -11,41 +11,37 @@
     
     <style>
         :root { --accent: #818cf8; --bg: #030303; }
-        body { background-color: var(--bg); color: #e4e4e7; font-size: 22px; line-height: 1.9; font-family: 'Inter', sans-serif; overflow-x: hidden; cursor: none; }
+        body { background-color: var(--bg); color: #e4e4e7; font-size: 20px; line-height: 1.8; font-family: 'Inter', sans-serif; overflow-x: hidden; cursor: none; }
 
-        /* Spark Cursor Style */
-        #cursor-spark {
-            position: fixed; width: 8px; height: 8px; background: white; border-radius: 50%;
-            pointer-events: none; z-index: 9999; mix-blend-mode: difference;
-            transition: transform 0.1s ease, opacity 0.3s ease;
-            box-shadow: 0 0 15px 2px #818cf8, 0 0 30px 5px #f472b6;
-        }
-        #cursor-flare {
-            position: fixed; width: 40px; height: 40px; border: 1px solid rgba(129, 140, 248, 0.3);
-            border-radius: 50%; pointer-events: none; z-index: 9998;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
+        .loader-text { font-family: 'Space Grotesk'; font-weight: 900; font-size: 2rem; color: white; letter-spacing: 1.5em; text-indent: 1.5em; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
-        /* Background Effects */
-        .mesh-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at 50% 50%, rgba(129, 140, 248, 0.05) 0%, transparent 50%);
-        }
+        #cursor-spark { position: fixed; width: 6px; height: 6px; background: white; border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s ease; box-shadow: 0 0 20px #818cf8, 0 0 40px #f472b6; }
+        #cursor-flare { position: fixed; width: 45px; height: 45px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; pointer-events: none; z-index: 9998; transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); top: 0; left: 0; }
+
+        .noise { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: .04; z-index: 50; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
 
         .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(3.5rem, 12vw, 9.5rem); line-height: 0.8; letter-spacing: -0.06em; font-weight: 900; }
-        .glass-card { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .glass-card:hover { border-color: var(--accent); background: rgba(129, 140, 248, 0.04); transform: translateY(-10px); }
-        .gradient-text { background: linear-gradient(135deg, #818cf8 0%, #f472b6 50%, #fb7185 100%); -webkit-background-clip: text; color: transparent; }
-        .evidence-tag { font-size: 10px; font-weight: 900; letter-spacing: 0.15em; color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); padding: 4px 14px; border-radius: 4px; text-transform: uppercase; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(25px); transform-style: preserve-3d; transition: all 0.5s ease; }
+        .glass-card:hover { border-color: var(--accent); background: rgba(129, 140, 248, 0.04); }
+        
+        .gradient-text { background: linear-gradient(135deg, #818cf8, #f472b6, #fb7185); -webkit-background-clip: text; color: transparent; }
         .section-header { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; letter-spacing: -0.05em; color: white; line-height: 1; }
+        
+        .evidence-tag { font-size: 10px; font-weight: 900; letter-spacing: 0.15em; color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); padding: 6px 16px; border-radius: 99px; text-transform: uppercase; background: rgba(129, 140, 248, 0.05); }
+
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
     </style>
 </head>
-<body class="selection:bg-indigo-500/40">
+<body>
+    <div id="loader"><div class="loader-text">D.PIXIE</div></div>
     <div id="cursor-spark"></div>
     <div id="cursor-flare"></div>
-    <div class="mesh-gradient"></div>
+    <div class="noise"></div>
+    <canvas id="canvas"></canvas>
 
-    <nav class="fixed top-0 w-full z-[100] px-12 py-8 flex justify-between items-center bg-[#030303]/90 backdrop-blur-xl border-b border-white/5">
+    <nav class="fixed top-0 w-full z-[100] px-12 py-8 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/5">
         <span class="text-white font-black tracking-tighter text-4xl">D.PIXIE</span>
         <div class="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.4em] font-black text-white/40">
             <a href="#about" class="hover:text-white transition">The Persona</a>
@@ -55,11 +51,11 @@
         </div>
     </nav>
 
-    <section class="min-h-screen flex flex-col justify-center px-12 relative overflow-hidden">
+    <section class="min-h-screen flex flex-col justify-center px-12 relative">
         <div data-aos="fade-up" data-aos-duration="1500">
             <p class="text-indigo-400 font-bold text-lg mb-10 tracking-[0.7em] uppercase">// Software Engineering • Asset Strategy • Leadership</p>
             <h1 class="hero-title text-white italic uppercase">Logic.<br><span class="gradient-text">Creation.</span><br>Scale.</h1>
-            <p class="mt-14 max-w-4xl text-3xl md:text-4xl text-slate-400 font-light leading-snug">
+            <p class="mt-14 max-w-4xl text-2xl md:text-4xl text-slate-400 font-light leading-snug">
                 I am <span class="text-white font-semibold">Drishti Mishra</span>. I architect resilient software systems and curate high-fidelity digital assets. Bridging the friction between <span class="text-white italic">raw code</span> and <span class="text-white italic">human interaction</span>.
             </p>
         </div>
@@ -67,10 +63,10 @@
 
     <section id="about" class="py-52 px-12 max-w-[90rem] mx-auto border-t border-white/5">
         <div class="grid lg:grid-cols-2 gap-32 items-start">
-            <div data-aos="fade-right" data-aos-duration="1200">
+            <div data-aos="fade-right">
                 <h2 class="section-header mb-12 italic">The Persona</h2>
                 <p class="text-2xl leading-relaxed mb-10">
-                    Pursuing B.Tech in IT at <span class="text-white font-bold">Usha Mittal Institute Of Technology</span> with a <span class="text-indigo-400 font-bold">7.81 GPA</span>. Synthesized with a <span class="text-pink-500 font-bold uppercase tracking-widest text-sm">Minor in Asset Creation</span>.
+                    Pursuing B.Tech in IT at <span class="text-white font-bold">Usha Mittal Institute Of Technology</span>. Synthesized with a <span class="text-pink-500 font-bold uppercase tracking-widest text-sm">Minor in Asset Creation</span>.
                 </p>
                 <p class="text-2xl leading-relaxed text-slate-400 mb-10">
                     I thrive on handling frontend interactivity, backend logic, automated data surveillance, and cross-functional leadership in active open-source environments.
@@ -79,7 +75,7 @@
                     Beyond code, I served as the <span class="text-white font-bold italic">Operations & Logistics Head for Ideathon</span>, collaborating with a core team to streamline pitching strategies.
                 </p>
                 
-                <div class="glass-card p-12 rounded-[3rem]">
+                <div class="glass-card p-12 rounded-[3rem] tilt">
                     <h3 class="text-sm font-black uppercase tracking-widest text-indigo-400 mb-10">Architectural Split</h3>
                     <div class="h-4 bg-white/5 rounded-full overflow-hidden flex">
                         <div class="h-full bg-indigo-500" style="width: 70%;"></div>
@@ -92,20 +88,20 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-left" data-aos-duration="1200">
-                <div class="glass-card p-12 rounded-[2.5rem]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-left">
+                <div class="glass-card p-12 rounded-[2.5rem] tilt">
                     <h4 class="text-indigo-400 font-black text-xs uppercase tracking-widest mb-6">Programming</h4>
                     <p class="text-lg">Python, TypeScript, C, OOPS, and DSA Foundations.</p>
                 </div>
-                <div class="glass-card p-12 rounded-[2.5rem]">
+                <div class="glass-card p-12 rounded-[2.5rem] tilt">
                     <h4 class="text-pink-400 font-black text-xs uppercase tracking-widest mb-6">Visuals</h4>
                     <p class="text-lg">Inkscape, Krita, Photoshop, and Premiere Pro.</p>
                 </div>
-                <div class="glass-card p-12 rounded-[2.5rem]">
+                <div class="glass-card p-12 rounded-[2.5rem] tilt">
                     <h4 class="text-green-400 font-black text-xs uppercase tracking-widest mb-6">Workflows</h4>
                     <p class="text-lg">Git, GitHub Actions, Postman API, and Google Cloud SkillBoost.</p>
                 </div>
-                <div class="glass-card p-12 rounded-[2.5rem]">
+                <div class="glass-card p-12 rounded-[2.5rem] tilt">
                     <h4 class="text-yellow-400 font-black text-xs uppercase tracking-widest mb-6">Credentials</h4>
                     <p class="text-lg">Cyber Security (Deloitte) & Software Engineering (JPMorgan).</p>
                 </div>
@@ -117,17 +113,17 @@
         <div class="max-w-[90rem] mx-auto">
             <h2 class="section-header mb-24 tracking-tighter uppercase italic" data-aos="fade-up">Social Impact</h2>
             <div class="grid lg:grid-cols-3 gap-12">
-                <div class="glass-card p-14 rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card p-14 rounded-[3.5rem] tilt" data-aos="fade-up" data-aos-delay="100">
                     <i class="fas fa-newspaper text-5xl text-pink-500 mb-10"></i>
                     <h3 class="text-3xl font-black text-white uppercase mb-6 italic">NSS Coeditor</h3>
                     <p class="text-xl text-slate-400 leading-relaxed">Oversaw editorial content and strategic outreach initiatives for the NSS, promoting community responsibility.</p>
                 </div>
-                <div class="glass-card p-14 rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-14 rounded-[3.5rem] tilt" data-aos="fade-up" data-aos-delay="200">
                     <i class="fas fa-laptop-code text-5xl text-indigo-500 mb-10"></i>
                     <h3 class="text-3xl font-black text-white uppercase mb-6 italic">CSI Representative</h3>
                     <p class="text-xl text-slate-400 leading-relaxed">Conducted technical workshops and community outreach for the Computer Society of India (CSI).</p>
                 </div>
-                <div class="glass-card p-14 rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-card p-14 rounded-[3.5rem] tilt" data-aos="fade-up" data-aos-delay="300">
                     <i class="fas fa-users-cog text-5xl text-green-500 mb-10"></i>
                     <h3 class="text-3xl font-black text-white uppercase mb-6 italic">Ideathon Head</h3>
                     <p class="text-xl text-slate-400 leading-relaxed">Spearheaded logistics and pitching strategies as the Operations Head for Ideathon.</p>
@@ -139,60 +135,94 @@
     <section id="opensource" class="py-52 px-12 bg-white/[0.01] border-t border-white/5">
         <h2 class="section-header text-center mb-32 tracking-widest uppercase italic underline decoration-indigo-500" data-aos="zoom-in">Global Impact</h2>
         <div class="max-w-5xl mx-auto space-y-12">
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-left">
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
                 <div class="flex justify-between items-start mb-6">
                     <h3 class="text-3xl font-black text-white uppercase">CredX-AI: Semantic Engine</h3>
                     <a href="https://github.com/nitinc264/CredX-AI/pull/26" target="_blank" class="evidence-tag">View PR</a>
                 </div>
                 <p class="text-xl text-slate-400">Architected a <span class="text-white">Semantic Ranking Engine</span> utilizing weighted scoring across skill relevance and experience fit.</p>
             </div>
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-right"><div class="flex justify-between items-start mb-6"><h3 class="text-3xl font-black text-white uppercase">Resume Review Dashboard</h3><a href="..." class="evidence-tag">View Issue</a></div><p class="text-xl text-slate-400">Engineered a frontend comparison dashboard and history tracking interface.</p></div>
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-left"><div class="flex justify-between items-start mb-6"><h3 class="text-3xl font-black text-white uppercase">Fitfinder: Performance</h3><a href="..." class="evidence-tag">View Issue</a></div><p class="text-xl text-slate-400">Implemented frontend debouncing logic in TypeScript to optimize search performance.</p></div>
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-right"><div class="flex justify-between items-start mb-6"><h3 class="text-3xl font-black text-white uppercase">Foodie: Backend Submission</h3><a href="..." class="evidence-tag">View PR</a></div><p class="text-xl text-slate-400">Resolved whitespace validation bypass and synchronized backend submission flows.</p></div>
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-left"><div class="flex justify-between items-start mb-6"><h3 class="text-3xl font-black text-white uppercase">Resume Stability Fix</h3><a href="..." class="evidence-tag">View Issue</a></div><p class="text-xl text-slate-400">Mitigated race conditions in frontend processing that caused duplicate job generation.</p></div>
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-right"><div class="flex justify-between items-start mb-6"><h3 class="text-3xl font-black text-white uppercase">First Contributions</h3><a href="..." class="evidence-tag">View PR</a></div><p class="text-xl text-slate-400">Facilitated standard onboarding workflows for nascent open-source contributors.</p></div>
-            <div class="glass-card p-12 rounded-[3rem]" data-aos="fade-left"><div class="flex justify-between items-start mb-6"><h3 class="text-3xl font-black text-white uppercase">CredX-AI: Architecture</h3><a href="..." class="evidence-tag">View PR</a></div><p class="text-xl text-slate-400">Reorganized architecture into a standardized src/ layout for improved scalability.</p></div>
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-3xl font-black text-white uppercase">Resume Review Dashboard</h3>
+                    <a href="https://github.com/SharanyaAchanta/Smart-Resume-Reviewer/issues/100" target="_blank" class="evidence-tag">View Issue</a>
+                </div>
+                <p class="text-xl text-slate-400">Engineered a frontend comparison dashboard and history tracking interface for candidate assessments.</p>
+            </div>
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-3xl font-black text-white uppercase">Fitfinder: Performance</h3>
+                    <a href="https://github.com/Code-Social/fitfinder/issues/39" target="_blank" class="evidence-tag">View Issue</a>
+                </div>
+                <p class="text-xl text-slate-400">Implemented frontend debouncing logic in TypeScript to prevent excessive API floods and optimize search performance.</p>
+            </div>
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-3xl font-black text-white uppercase">Foodie: Backend Submission</h3>
+                    <a href="https://github.com/janavipandole/Foodie/pull/484" target="_blank" class="evidence-tag">View PR</a>
+                </div>
+                <p class="text-xl text-slate-400">Resolved whitespace validation bypass and synchronized backend submission flows for system integrity.</p>
+            </div>
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-3xl font-black text-white uppercase">Resume Stability Fix</h3>
+                    <a href="https://github.com/SharanyaAchanta/Smart-Resume-Reviewer/issues/39" target="_blank" class="evidence-tag">View Issue</a>
+                </div>
+                <p class="text-xl text-slate-400">Mitigated race conditions in frontend processing that caused duplicate job generation on double-click.</p>
+            </div>
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-3xl font-black text-white uppercase">First Contributions</h3>
+                    <a href="https://github.com/firstcontributions/first-contributions/pull/107963" target="_blank" class="evidence-tag">View PR</a>
+                </div>
+                <p class="text-xl text-slate-400">Facilitated standard onboarding workflows for nascent open-source contributors globally.</p>
+            </div>
+            <div class="glass-card p-12 rounded-[3rem] tilt" data-aos="fade-up">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-3xl font-black text-white uppercase">CredX-AI: Architecture</h3>
+                    <a href="https://github.com/nitinc264/CredX-AI/pull/19" target="_blank" class="evidence-tag">View PR</a>
+                </div>
+                <p class="text-xl text-slate-400">Reorganized architecture into a standardized src/ layout, optimizing packaging and internal import logic for improved system scalability.</p>
+            </div>
         </div>
     </section>
 
     <section id="projects" class="py-52 px-12 max-w-[90rem] mx-auto border-t border-white/5">
-        <h2 class="section-header mb-32 tracking-tighter uppercase italic border-l-[15px] border-indigo-600 pl-12" data-aos="fade-right">Artifacts</h2>
+        <h2 class="section-header mb-32 tracking-tighter uppercase italic border-l-[15px] border-indigo-600 pl-12">Artifacts</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="glass-card p-16 rounded-[4rem] flex flex-col justify-between h-full" data-aos="flip-left" data-aos-delay="100">
-                <div><h4 class="text-3xl font-black text-white mb-8 uppercase">Smart Pantry AI</h4><p class="text-xl text-slate-400 italic">Inventory tracking engine with a recipe suggestion backend.</p></div>
-                <a href="https://github.com/Drishtipixiee/Smart-Pantry-AI-Chef-By-Drishti" target="_blank" class="mt-12 text-lg font-black text-indigo-400 hover:text-white transition uppercase underline underline-offset-8">Inspect →</a>
+            <div class="glass-card p-12 rounded-[4rem] h-96 flex flex-col justify-between tilt group" data-aos="flip-up">
+                <div><h4 class="text-3xl font-black text-white mb-8 uppercase group-hover:text-indigo-400 transition">Smart Pantry AI</h4><p class="text-xl text-slate-400 italic">Inventory tracking engine with a recipe suggestion backend.</p></div>
+                <a href="https://github.com/Drishtipixiee/Smart-Pantry-AI-Chef-By-Drishti" target="_blank" class="text-lg font-black text-indigo-400 underline underline-offset-8">Inspect →</a>
             </div>
-            <div class="glass-card p-16 rounded-[4rem] flex flex-col justify-between h-full" data-aos="flip-left" data-aos-delay="200">
-                <div><h4 class="text-3xl font-black text-white mb-8 uppercase">JavaFX Analysis</h4><p class="text-xl text-slate-400 italic">Advanced analytical application for CSV data visualization.</p></div>
-                <a href="https://github.com/Drishtipixiee/JavaFX-Data-Visualization-Tool" target="_blank" class="mt-12 text-lg font-black text-indigo-400 hover:text-white transition uppercase underline underline-offset-8">Inspect →</a>
+            <div class="glass-card p-12 rounded-[4rem] h-96 flex flex-col justify-between tilt group" data-aos="flip-up" data-aos-delay="100">
+                <div><h4 class="text-3xl font-black text-white mb-8 uppercase group-hover:text-indigo-400 transition">JavaFX Analysis</h4><p class="text-xl text-slate-400 italic">Advanced analytical application for CSV data visualization.</p></div>
+                <a href="https://github.com/Drishtipixiee/JavaFX-Data-Visualization-Tool" target="_blank" class="text-lg font-black text-indigo-400 underline underline-offset-8">Inspect →</a>
             </div>
-            <div class="glass-card p-16 rounded-[4rem] flex flex-col justify-between h-full" data-aos="flip-left" data-aos-delay="300">
-                <div><h4 class="text-3xl font-black text-white mb-8 uppercase">IPO Tracker</h4><p class="text-xl text-slate-400 italic">Automated surveillance tool aggregating financial data.</p></div>
-                <a href="https://github.com/Drishtipixiee/Ipo-Tracker-by-Drishti" target="_blank" class="mt-12 text-lg font-black text-indigo-400 hover:text-white transition uppercase underline underline-offset-8">Inspect →</a>
+            <div class="glass-card p-12 rounded-[4rem] h-96 flex flex-col justify-between tilt group" data-aos="flip-up" data-aos-delay="200">
+                <div><h4 class="text-3xl font-black text-white mb-8 uppercase group-hover:text-indigo-400 transition">IPO Tracker</h4><p class="text-xl text-slate-400 italic">Automated surveillance tool aggregating financial data from public APIs.</p></div>
+                <a href="https://github.com/Drishtipixiee/Ipo-Tracker-by-Drishti" target="_blank" class="text-lg font-black text-indigo-400 underline underline-offset-8">Inspect →</a>
             </div>
-            <div class="glass-card p-16 rounded-[4rem] flex flex-col justify-between h-full" data-aos="flip-left" data-aos-delay="400">
-                <div><h4 class="text-3xl font-black text-white mb-8 uppercase">NLP Chatbot</h4><p class="text-xl text-slate-400 italic">Rule-based agent designed for interactive engagement.</p></div>
-                <a href="https://github.com/Drishtipixiee/Chatbot-by-Drishtipixie" target="_blank" class="mt-12 text-lg font-black text-indigo-400 hover:text-white transition uppercase underline underline-offset-8">Inspect →</a>
+            <div class="glass-card p-12 rounded-[4rem] h-96 flex flex-col justify-between tilt group" data-aos="flip-up" data-aos-delay="300">
+                <div><h4 class="text-3xl font-black text-white mb-8 uppercase group-hover:text-indigo-400 transition">NLP Chatbot</h4><p class="text-xl text-slate-400 italic">Rule-based agent designed for interactive engagement.</p></div>
+                <a href="https://github.com/Drishtipixiee/Chatbot-by-Drishtipixie" target="_blank" class="text-lg font-black text-indigo-400 underline underline-offset-8">Inspect →</a>
             </div>
-            <div class="glass-card p-16 rounded-[4rem] flex flex-col justify-between h-full" data-aos="flip-left" data-aos-delay="500">
-                <div><h4 class="text-3xl font-black text-white mb-8 uppercase">University Portal</h4><p class="text-xl text-slate-400 italic">Responsive academic architecture built with HTML/CSS/JS.</p></div>
-                <a href="https://github.com/Drishtipixiee/University-Website-using-Html-css-javascript-" target="_blank" class="mt-12 text-lg font-black text-indigo-400 hover:text-white transition uppercase underline underline-offset-8">Inspect →</a>
+            <div class="glass-card p-12 rounded-[4rem] h-96 flex flex-col justify-between tilt group" data-aos="flip-up" data-aos-delay="400">
+                <div><h4 class="text-3xl font-black text-white mb-8 uppercase group-hover:text-indigo-400 transition">University Portal</h4><p class="text-xl text-slate-400 italic">Responsive academic architecture built with HTML/CSS/JS.</p></div>
+                <a href="https://github.com/Drishtipixiee/University-Website-using-Html-css-javascript-" target="_blank" class="text-lg font-black text-indigo-400 underline underline-offset-8">Inspect →</a>
             </div>
-            <div class="glass-card p-16 rounded-[4rem] flex flex-col justify-between h-full" data-aos="flip-left" data-aos-delay="600">
-                <div><h4 class="text-2xl font-black text-white mb-8 uppercase">Fact Generator</h4><p class="text-xl text-slate-400 italic">Dynamic content delivery system utilizing the Pieces toolkit.</p></div>
-                <a href="https://github.com/Drishtipixiee/my-fact-generator-project" target="_blank" class="mt-12 text-lg font-black text-indigo-400 hover:text-white transition uppercase underline underline-offset-8">Inspect →</a>
+            <div class="glass-card p-12 rounded-[4rem] h-96 flex flex-col justify-between tilt group" data-aos="flip-up" data-aos-delay="500">
+                <div><h4 class="text-2xl font-black text-white mb-8 uppercase group-hover:text-indigo-400 transition">Fact Generator</h4><p class="text-xl text-slate-400 italic">Dynamic content delivery system utilizing the Pieces toolkit.</p></div>
+                <a href="https://github.com/Drishtipixiee/my-fact-generator-project" target="_blank" class="text-lg font-black text-indigo-400 underline underline-offset-8">Inspect →</a>
             </div>
         </div>
     </section>
 
-    <footer class="py-80 px-12 text-center relative border-t border-white/5">
-        <h2 class="section-header mb-16 tracking-tighter uppercase italic" data-aos="zoom-in">Let's Connect</h2>
-        <div class="max-w-5xl mx-auto flex flex-col items-center gap-16">
-            <a href="mailto:drishtimishrahere@gmail.com" class="text-3xl md:text-5xl font-black text-indigo-400 hover:text-white transition-all underline underline-offset-[20px] decoration-white/5">drishtimishrahere@gmail.com</a>
-            <div class="flex gap-20 mt-16">
-                <a href="https://github.com/Drishtipixiee" target="_blank" class="text-slate-500 hover:text-white text-5xl transition"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/drishti-mishra-665827382" target="_blank" class="text-slate-500 hover:text-white text-5xl transition"><i class="fab fa-linkedin"></i></a>
-            </div>
+    <footer class="py-80 px-12 text-center border-t border-white/5">
+        <h2 class="section-header mb-16 italic" data-aos="zoom-in">Let's Connect</h2>
+        <a href="mailto:drishtimishrahere@gmail.com" class="text-3xl md:text-5xl font-black gradient-text underline decoration-white/10">drishtimishrahere@gmail.com</a>
+        <div class="flex justify-center gap-12 mt-20">
+            <a href="https://github.com/Drishtipixiee" target="_blank" class="text-4xl text-slate-600 hover:text-white transition-all"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/drishti-mishra-665827382" target="_blank" class="text-4xl text-slate-600 hover:text-white transition-all"><i class="fab fa-linkedin"></i></a>
         </div>
         <p class="mt-40 uppercase font-black text-slate-800 tracking-[1.5em] text-sm">© 2026 Drishti Mishra // System Architecture & Social Impact</p>
     </footer>
@@ -200,33 +230,37 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
+        window.onload = () => { setTimeout(() => { document.getElementById('loader').style.opacity = '0'; setTimeout(() => document.getElementById('loader').remove(), 1000); }, 1500); };
 
         const spark = document.getElementById('cursor-spark');
         const flare = document.getElementById('cursor-flare');
-
         document.addEventListener('mousemove', (e) => {
-            const { clientX: x, clientY: y } = e;
-            spark.style.transform = `translate(${x}px, ${y}px)`;
-            flare.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
+            spark.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            flare.style.left = `${e.clientX - 22}px`; flare.style.top = `${e.clientY - 22}px`;
         });
 
-        document.querySelectorAll('a, button, .glass-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                spark.style.transform += ' scale(2.5)';
-                spark.style.background = '#f472b6';
-                flare.style.width = '80px';
-                flare.style.height = '80px';
-                flare.style.borderColor = '#f472b6';
-                flare.style.background = 'rgba(244, 114, 182, 0.1)';
+        document.querySelectorAll('.tilt').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                const xc = rect.width / 2; const yc = rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateY(${(x - xc) / 10}deg) rotateX(${-(y - yc) / 10}deg) scale3d(1.05, 1.05, 1.05)`;
             });
-            el.addEventListener('mouseleave', () => {
-                spark.style.background = 'white';
-                flare.style.width = '40px';
-                flare.style.height = '40px';
-                flare.style.borderColor = 'rgba(129, 140, 248, 0.3)';
-                flare.style.background = 'transparent';
-            });
+            card.addEventListener('mouseleave', () => card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) scale3d(1, 1, 1)');
         });
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        class Particle {
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.x > canvas.width) this.x = 0; if (this.y > canvas.height) this.y = 0; }
+            draw() { ctx.fillStyle = 'rgba(129, 140, 248, 0.2)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+        function init() { for (let i = 0; i < 100; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        init(); animate();
     </script>
 </body>
 </html>
